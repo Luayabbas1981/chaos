@@ -86,3 +86,13 @@ function animi() {
   circleArr.forEach(item=> item.update())
 }
 animi()
+
+document.addEventListener("pointerdown",function(event){
+  let mouseX = event.clientX;
+  let mouseY = event.clientY;
+  circleArr.forEach(item=>{
+    item.x = mouseX;
+    item.y= mouseY
+  })
+  console.log(mouseX,mouseY)
+})
