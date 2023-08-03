@@ -65,7 +65,7 @@ class Circle {
 let circleArr = []
 let ballsNum=0
 if(window.innerWidth <767){
-    ballsNum= 50
+    ballsNum= 70
 }else{
     ballsNum=300
 }
