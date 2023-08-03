@@ -70,6 +70,7 @@ class Circle {
 
 let circleArr = []
 
+
 for(let i=0;i<ballsNum;i++){
 let radius = 30    
 let x = Math.random() * (window.innerWidth - radius*2) +radius;
