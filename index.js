@@ -2,6 +2,12 @@ const canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth ;
 canvas.height = window.innerHeight ;
 
+let ballsNum=0
+if(window.innerWidth <767){
+    ballsNum= 70
+}else{
+    ballsNum=300
+}
 function createColors() {
   const colors = [
     "a",
@@ -63,12 +69,7 @@ class Circle {
 }
 
 let circleArr = []
-let ballsNum=0
-if(window.innerWidth <767){
-    ballsNum= 70
-}else{
-    ballsNum=300
-}
+
 for(let i=0;i<400;i++){
 let radius = 30    
 let x = Math.random() * (window.innerWidth - radius*2) +radius;
