@@ -118,7 +118,7 @@ function hideAddressBar() {
   
   // Detect scroll event
   window.addEventListener('scroll', function() {
-    if (!window.pageYOffset) {
+    if (!window.scrollY) {
       // If scrolled to the top, set the height to a smaller value
       document.body.style.height = (window.innerHeight + 1) + 'px';
       setTimeout(function() {
