@@ -114,19 +114,19 @@ document.addEventListener("pointerdown", function (event) {
     console.log(quarter);
     if (i < quarter + 1) {
       item.x = mouseX + 75;
-      item.y = mouseY - 100;
+      item.y = mouseY - 75;
     }
     if (i > quarter && i < quarter * 2 + 1) {
       item.x = mouseX - 75;
-      item.y = mouseY - 100;
+      item.y = mouseY - 75;
     }
     if (i > quarter * 2 && i < quarter * 3 + 1) {
       item.x = mouseX - 75;
-      item.y = mouseY + 150;
+      item.y = mouseY + 75;
     }
     if (i > quarter * 3 && i < quarter * 4 + 1) {
       item.x = mouseX + 75;
-      item.y = mouseY + 150;
+      item.y = mouseY + 75;
     }
   });
 });
