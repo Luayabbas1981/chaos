@@ -104,8 +104,7 @@ window.addEventListener("resize", function () {
 init();
 animi();
 
-const halfWindowX = window.innerWidth / 2;
-const halfWindowY = window.innerHeight / 2;
+
 document.addEventListener("pointerdown", function (event) {
   let mouseX = event.clientX;
   let mouseY = event.clientY;
