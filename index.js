@@ -2,7 +2,7 @@ const canvas = document.querySelector("canvas");
 const paragraph = document.querySelector(".info-con")
 const ballsNumCon = document.querySelector(".num-con")
 canvas.width = window.innerWidth;
-canvas.height = (window.innerHeight / 10) * 9;
+canvas.height = window.innerHeight ;
 
 let ballsNum = 0;
 if (window.innerWidth < 767) {
@@ -64,7 +64,7 @@ class Circle {
         this.dx = -this.dx;
       }
       if (
-        this.y + this.radius > (window.innerHeight / 10) * 9 ||
+        this.y + this.radius > window.innerHeight ||
         this.y - this.radius < 0
       ) {
         this.dy = -this.dy;
@@ -80,12 +80,11 @@ let circleArr;
 
 function init() {
   circleArr = [];
-  let newHeight = (window.innerHeight / 10) * 9;
-  console.log(newHeight);
+
   for (let i = 0; i < ballsNum; i++) {
     let radius = 30;
     let x = Math.random() * (window.innerWidth - radius);
-    let y = Math.random() * (newHeight - radius);
+    let y = Math.random() * (window.innerHeight - radius);
     let dx = (Math.random() - 0.5) * 2;
     let dy = (Math.random() - 0.5) * 2;
     circleArr.push(new Circle(x, y, dx, dy, radius));
@@ -115,19 +114,19 @@ document.addEventListener("pointerdown", function (event) {
     console.log(quarter);
     if (i < quarter + 1) {
       item.x = mouseX + 75;
-      item.y = mouseY - 35;
+      item.y = mouseY - 100;
     }
     if (i > quarter && i < quarter * 2 + 1) {
       item.x = mouseX - 75;
-      item.y = mouseY - 35;
+      item.y = mouseY - 100;
     }
     if (i > quarter * 2 && i < quarter * 3 + 1) {
       item.x = mouseX - 75;
-      item.y = mouseY - 150;
+      item.y = mouseY + 150;
     }
     if (i > quarter * 3 && i < quarter * 4 + 1) {
       item.x = mouseX + 75;
-      item.y = mouseY - 150;
+      item.y = mouseY + 150;
     }
   });
 });
@@ -151,26 +150,4 @@ function hideAddressBar() {
 
 window.onload = hideAddressBar();
 
-let previousValue = 100
-window.addEventListener("mousemove",function changeBallsNum(event) {
-  mouseY= event.clientY;
-  if(mouseY> previousValue ){
-    ballsNum = parseInt(mouseY / 10)
-    console.log(ballsNum)
-    paragraph.classList.add("d-none")
-    ballsNumCon.textContent= ballsNum
-    init();
-   
-  }else{
-    paragraph.classList.add("d-none")
-    ballsNum = parseInt(mouseY / 18)
-    ballsNumCon.textContent= ballsNum
-    init();
-    console.log(ballsNum)
-    init();
-  }
-  previousValue= mouseY
-  console.log(mouseY)
 
-  
-})
