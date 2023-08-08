@@ -1,12 +1,12 @@
 const canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = (window.innerHeight / 10) * 9;
 
 let ballsNum = 0;
 if (window.innerWidth < 767) {
-  ballsNum = 70;
+  ballsNum = 40;
 } else {
-  ballsNum = 300;
+  ballsNum = 100;
 }
 function createColors() {
   const colors = [
@@ -62,7 +62,7 @@ class Circle {
         this.dx = -this.dx;
       }
       if (
-        this.y + this.radius > window.innerHeight ||
+        this.y + this.radius > (window.innerHeight /10)*9 ||
         this.y - this.radius < 0
       ) {
         this.dy = -this.dy;
@@ -74,19 +74,20 @@ class Circle {
   }
 }
 
-let circleArr
-function init(){
-  circleArr = [];
+let circleArr;
 
-for (let i = 0; i < ballsNum; i++) {
-  let radius = 30;
-  let x = Math.random() * (window.innerWidth - radius * 2) + radius;
-  let y = Math.random() * (window.innerHeight - radius * 2) + radius;
-  let dx = (Math.random() - 0.5) *2;
-  let dy = (Math.random() - 0.5) *2;
-  circleArr.push(new Circle(x, y, dx, dy, radius));
-  console.log(circleArr.length)
-}
+function init() {
+  circleArr = [];
+  let newHeight = (window.innerHeight/10)*9
+  console.log(newHeight)
+  for (let i = 0; i < ballsNum; i++) {
+    let radius = 30;
+    let x = Math.random() * (window.innerWidth - radius)  ;
+    let y = Math.random() * (newHeight - radius)  ;
+    let dx = (Math.random() - 0.5) * 2;
+    let dy = (Math.random() - 0.5) * 2;
+    circleArr.push(new Circle(x, y, dx, dy, radius));
+  }
 }
 function animi() {
   requestAnimationFrame(animi);
@@ -96,37 +97,54 @@ function animi() {
 window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  init()
+  init();
   animi();
 });
-init()
+init();
 animi();
+
+const halfWindowX = window.innerWidth / 2;
+const halfWindowY = window.innerHeight / 2;
 document.addEventListener("pointerdown", function (event) {
   let mouseX = event.clientX;
   let mouseY = event.clientY;
-  circleArr.forEach((item) => {
-    item.x = mouseX;
-    item.y = mouseY;
-  });
-  console.log(mouseX, mouseY);
+  circleArr.forEach((item,i) => {
+      const quarter = ballsNum /4
+      console.log(quarter)
+      if( i< quarter +1){
+        item.x = mouseX + 75;
+        item.y = mouseY - 35;
+      } if(i> quarter  && i < quarter*2  +1){
+        item.x = mouseX - 75;
+        item.y = mouseY - 35;
+      }
+      if(i> quarter*2  && i < quarter*3 +1){
+        item.x = mouseX - 75;
+        item.y = mouseY - 150;
+      }if(i> quarter*3  && i < quarter*4 +1){
+        item.x = mouseX + 75;
+        item.y = mouseY - 150;
+      }
+     
+    }
+  );
 });
-
 
 function hideAddressBar() {
   // Set the height of the body to 100vh initially
-  document.body.style.height = window.innerHeight + 'px';
-  
+  document.body.style.height = window.innerHeight + "px";
+
   // Detect scroll event
-  window.addEventListener('scroll', function() {
+  window.addEventListener("scroll", function () {
     if (!window.scrollY) {
       // If scrolled to the top, set the height to a smaller value
-      document.body.style.height = (window.innerHeight + 1) + 'px';
-      setTimeout(function() {
+      document.body.style.height = window.innerHeight + 1 + "px";
+      setTimeout(function () {
         // Reset the height after a short delay to ensure smooth scrolling
-        document.body.style.height = window.innerHeight + 'px';
+        document.body.style.height = window.innerHeight + "px";
       }, 500);
     }
   });
 }
 
-window.onload=hideAddressBar()
+window.onload = hideAddressBar();
