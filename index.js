@@ -4,12 +4,9 @@ const ballsNumCon = document.querySelector(".num-con")
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight ;
 
-let ballsNum = 0;
-if (window.innerWidth < 767) {
-  ballsNum = 40;
-} else {
-  ballsNum = 200;
-}
+let ballsNum = parseInt(window.innerWidth / 7)
+console.log(ballsNum)
+
 function createColors() {
   const colors = [
     "a",
@@ -83,8 +80,8 @@ function init() {
 
   for (let i = 0; i < ballsNum; i++) {
     let radius = 30;
-    let x = Math.random() * (window.innerWidth - radius);
-    let y = Math.random() * (window.innerHeight - radius);
+    let x = Math.random() * (window.innerWidth - radius*2) +radius;
+    let y = Math.random() * (window.innerHeight - radius*2)+radius;
     let dx = (Math.random() - 0.5) * 2;
     let dy = (Math.random() - 0.5) * 2;
     let arcColor = createColors();
