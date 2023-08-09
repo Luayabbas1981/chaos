@@ -3,6 +3,10 @@ const paragraph = document.querySelector(".info-con");
 const ballsNumCon = document.querySelector(".num-con");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
 let ballsNum = parseInt(window.innerWidth / 7);
 console.log(ballsNum);
@@ -60,11 +64,20 @@ class Circle {
     this.draw = function () {
       c.beginPath();
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      if (isMobile) {
+        const ballFilled = parseInt(ballsNum / 1.5);
+        circleArr.forEach((item, i) => {
+          if (i < ballFilled) {
+           item.isEffected= true
+
+          }
+        });
+      }
       if (this.isEffected) {
         c.fillStyle = this.color;
         c.fill();
       } else {
-        c.strokeStyle = this.color; // Set the strokeStyle to the circle's color
+        c.strokeStyle = this.color;
         c.stroke();
       }
     };
@@ -93,7 +106,6 @@ class Circle {
       ) {
         this.radius += 1;
         this.isEffected = true;
-       
       } else if (this.radius > radius) {
         this.radius -= 1;
         setTimeout(() => {
@@ -135,7 +147,31 @@ window.addEventListener("resize", function () {
 init();
 animi();
 
-
+/* window.addEventListener("pointerdown", function (event) {
+  let mouseX = event.clientX;
+  let mouseY = event.clientY;
+  circleArr.forEach((item, i) => {
+    const quarter = ballsNum / 4;
+    console.log(quarter);
+    if (i < quarter + 1) {
+      item.x = mouseX + 75;
+      item.y = mouseY - 75;
+    }
+    if (i > quarter && i < quarter * 2 + 1) {
+      item.x = mouseX - 75;
+      item.y = mouseY - 75;
+    }
+    if (i > quarter * 2 && i < quarter * 3 + 1) {
+      item.x = mouseX - 75;
+      item.y = mouseY + 75;
+    }
+    if (i > quarter * 3 && i < quarter * 4 + 1) {
+      item.x = mouseX + 75;
+      item.y = mouseY + 75;
+    }
+  });
+});
+ */
 function hideAddressBar() {
   // Set the height of the body to 100vh initially
   document.body.style.height = window.innerHeight + "px";
