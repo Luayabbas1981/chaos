@@ -68,8 +68,7 @@ class Circle {
         const ballFilled = parseInt(ballsNum / 1.5);
         circleArr.forEach((item, i) => {
           if (i < ballFilled) {
-           item.isEffected= true
-
+            item.isEffected = true;
           }
         });
       }
