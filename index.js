@@ -153,7 +153,7 @@ window.addEventListener("resize", function () {
 init();
 animi();
 
-window.addEventListener("click",function(){
+window.addEventListener("pointerdown",function(){
   circleArr.forEach((item)=>{
     if(isMobile && item.isEffected === true)
     item.color = createColors()
