@@ -93,11 +93,12 @@ class Circle {
       ) {
         this.radius += 1;
         this.isEffected = true;
-        setTimeout(() => {
-          this.isEffected = false;
-        }, 2000);
+       
       } else if (this.radius > radius) {
         this.radius -= 1;
+        setTimeout(() => {
+          this.isEffected = false;
+        }, 1000);
       }
       this.draw();
     };
@@ -134,30 +135,6 @@ window.addEventListener("resize", function () {
 init();
 animi();
 
-window.addEventListener("pointerdown", function (event) {
-  let mouseX = event.clientX;
-  let mouseY = event.clientY;
-  circleArr.forEach((item, i) => {
-    const quarter = ballsNum / 4;
-    console.log(quarter);
-    if (i < quarter + 1) {
-      item.x = mouseX + 75;
-      item.y = mouseY - 75;
-    }
-    if (i > quarter && i < quarter * 2 + 1) {
-      item.x = mouseX - 75;
-      item.y = mouseY - 75;
-    }
-    if (i > quarter * 2 && i < quarter * 3 + 1) {
-      item.x = mouseX - 75;
-      item.y = mouseY + 75;
-    }
-    if (i > quarter * 3 && i < quarter * 4 + 1) {
-      item.x = mouseX + 75;
-      item.y = mouseY + 75;
-    }
-  });
-});
 
 function hideAddressBar() {
   // Set the height of the body to 100vh initially
