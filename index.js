@@ -1,11 +1,11 @@
 const canvas = document.querySelector("canvas");
-const paragraph = document.querySelector(".info-con")
-const ballsNumCon = document.querySelector(".num-con")
+const paragraph = document.querySelector(".info-con");
+const ballsNumCon = document.querySelector(".num-con");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight ;
+canvas.height = window.innerHeight;
 
-let ballsNum = parseInt(window.innerWidth / 7)
-console.log(ballsNum)
+let ballsNum = parseInt(window.innerWidth / 7);
+console.log(ballsNum);
 
 function createColors() {
   const colors = [
@@ -37,8 +37,17 @@ const c = canvas.getContext("2d");
 
 //arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean | undefined)
 //
-let radius = 40;
 
+let mouse = {
+  x: undefined,
+  y: undefined,
+};
+window.addEventListener("pointermove", function (event) {
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
+});
+let radius = 10;
+const maxRadius = 60;
 class Circle {
   constructor(x, y, dx, dy, radius) {
     this.x = x;
@@ -68,6 +77,18 @@ class Circle {
       }
       this.x += this.dx;
       this.y += this.dy;
+
+      if (
+        mouse.x - this.x < 150 &&
+        mouse.x - this.x > -150 &&
+        mouse.y - this.y < 150 &&
+        mouse.y - this.y > -150 &&
+        this.radius < maxRadius
+      ) {
+        this.radius += 1;
+      } else if (this.radius > radius) {
+        this.radius -= 1;
+      }
       this.draw();
     };
   }
@@ -80,10 +101,10 @@ function init() {
 
   for (let i = 0; i < ballsNum; i++) {
     let radius = 30;
-    let x = Math.random() * (window.innerWidth - radius*2) +radius;
-    let y = Math.random() * (window.innerHeight - radius*2)+radius;
-    let dx = (Math.random() - 0.5) * 2;
-    let dy = (Math.random() - 0.5) * 2;
+    let x = Math.random() * (window.innerWidth - radius * 2) + radius;
+    let y = Math.random() * (window.innerHeight - radius * 2) + radius;
+    let dx = (Math.random() - 0.5) * 4;
+    let dy = (Math.random() - 0.5) * 4;
     let arcColor = createColors();
     circleArr.push(new Circle(x, y, dx, dy, radius));
     c.strokeStyle = arcColor;
@@ -103,8 +124,7 @@ window.addEventListener("resize", function () {
 init();
 animi();
 
-
-document.addEventListener("pointerdown", function (event) {
+window.addEventListener("pointerdown", function (event) {
   let mouseX = event.clientX;
   let mouseY = event.clientY;
   circleArr.forEach((item, i) => {
@@ -147,5 +167,3 @@ function hideAddressBar() {
 }
 
 window.onload = hideAddressBar();
-
-
