@@ -8,7 +8,7 @@ let ballsNum = 0;
 if (window.innerWidth < 767) {
   ballsNum = 40;
 } else {
-  ballsNum = 100;
+  ballsNum = 200;
 }
 function createColors() {
   const colors = [
@@ -49,11 +49,11 @@ class Circle {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.color = createColors(); // Assign the color here
     this.draw = function () {
       c.beginPath();
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      let arcColor = createColors();
-      c.strokeStyle = arcColor;
+      c.strokeStyle = this.color; // Set the strokeStyle to the circle's color
       c.stroke();
     };
     this.update = function () {
@@ -87,7 +87,9 @@ function init() {
     let y = Math.random() * (window.innerHeight - radius);
     let dx = (Math.random() - 0.5) * 2;
     let dy = (Math.random() - 0.5) * 2;
+    let arcColor = createColors();
     circleArr.push(new Circle(x, y, dx, dy, radius));
+    c.strokeStyle = arcColor;
   }
 }
 function animi() {
