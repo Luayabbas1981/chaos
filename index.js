@@ -28,7 +28,7 @@ function createColors() {
   let randomColor = `#${colors
     .sort(() => Math.random() - 0.5)
     .join("")
-    .slice(0, 6)}`;
+    .slice(0, 6)}80`;
   return randomColor;
 }
 const c = canvas.getContext("2d");
@@ -55,20 +55,18 @@ class Circle {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
-    this.isEffected = false
+    this.isEffected = false;
     this.color = createColors();
     this.draw = function () {
       c.beginPath();
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      if(this.isEffected){
-        c.fillStyle = this.color
-        c.fill()
-      }else{
-
-     
-      c.strokeStyle = this.color; // Set the strokeStyle to the circle's color
-      c.stroke();
-    }
+      if (this.isEffected) {
+        c.fillStyle = this.color;
+        c.fill();
+      } else {
+        c.strokeStyle = this.color; // Set the strokeStyle to the circle's color
+        c.stroke();
+      }
     };
     this.update = function () {
       if (
@@ -94,13 +92,12 @@ class Circle {
         this.radius < maxRadius
       ) {
         this.radius += 1;
-        this.isEffected = true
+        this.isEffected = true;
         setTimeout(() => {
-          this.isEffected = false
+          this.isEffected = false;
         }, 2000);
       } else if (this.radius > radius) {
         this.radius -= 1;
-      
       }
       this.draw();
     };
