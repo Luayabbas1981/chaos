@@ -9,7 +9,11 @@ isMobile =
   );
 
 let ballsNum = parseInt(window.innerWidth / 7);
-console.log(ballsNum);
+
+function randomNumber(min, max) {
+  const num = Math.floor(Math.random() * (max - min + 1) + min);
+  return num;
+}
 
 function createColors() {
   const colors = [
@@ -47,6 +51,9 @@ let mouse = {
   y: undefined,
 };
 window.addEventListener("pointermove", function (event) {
+  if (isMobile) {
+    return;
+  }
   mouse.x = event.clientX;
   mouse.y = event.clientY;
 });
