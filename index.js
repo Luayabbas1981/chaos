@@ -58,7 +58,7 @@ window.addEventListener("pointermove", function (event) {
   mouse.y = event.clientY;
 });
 let radius = 10;
-const maxRadius = 60;
+const maxRadius = 75;
 class Circle {
   constructor(x, y, dx, dy, radius) {
     this.x = x;
@@ -129,7 +129,7 @@ function init() {
   circleArr = [];
 
   for (let i = 0; i < ballsNum; i++) {
-    let radius = 30;
+    let radius = 35;
     let x = Math.random() * (window.innerWidth - radius * 2) + radius;
     let y = Math.random() * (window.innerHeight - radius * 2) + radius;
     let dx = (Math.random() - 0.5) * 4;
