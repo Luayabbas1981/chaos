@@ -129,7 +129,8 @@ function init() {
   circleArr = [];
 
   for (let i = 0; i < ballsNum; i++) {
-    let radius = 40;
+    let radius;
+    isMobile? radius=30: radius=40;
     let x = Math.random() * (window.innerWidth - radius * 2) + radius;
     let y = Math.random() * (window.innerHeight - radius * 2) + radius;
     let dx = (Math.random() - 0.5) * 4;
